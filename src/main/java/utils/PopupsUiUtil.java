@@ -7,7 +7,7 @@ import com.intellij.ui.awt.RelativePoint;
 import com.intellij.ui.tabs.TabInfo;
 import com.intellij.ui.tabs.TabsListener;
 import com.intellij.ui.tabs.impl.JBTabsImpl;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +28,7 @@ public class PopupsUiUtil {
     public static void showImageByFundCode(String fundCode, FundShowType type, Point showByPoint) throws MalformedURLException {
         //------试图解决个BUG，项目销毁的问题-------
         Project project = LogUtil.getProject();
-        if (project.isDisposed()){
+        if (project.isDisposed()) {
             return;
         }
         // 图片接口

@@ -1,7 +1,7 @@
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 import quartz.QuartzManager;
@@ -9,8 +9,6 @@ import utils.HttpClientPool;
 import utils.LogUtil;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -61,12 +59,9 @@ public class SettingsWindow  implements Configurable {
         cronExpressionCoin.setText(instance.getValue("key_cron_expression_coin","*/10 * * * * ?")); //默认每10秒执行
         //代理设置
         inputProxy.setText(instance.getValue("key_proxy"));
-        proxyTestButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                String proxy = inputProxy.getText().trim();
-                testProxy(proxy);
-            }
+        proxyTestButton.addActionListener((a) -> {
+            String proxy = inputProxy.getText().trim();
+            testProxy(proxy);
         });
         return panel1;
     }

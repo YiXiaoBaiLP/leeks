@@ -18,7 +18,7 @@ public class WindowUtils {
     public static final String COIN_TABLE_HEADER_KEY = "coin_table_header_key2"; //移动表头时存储的key
     public static final String COIN_TABLE_HEADER_VALUE = "编码,当前价,涨跌,涨跌幅,最高价,最低价,更新时间";
 
-    private static HashMap<String,String> remapPinYinMap = new HashMap<>();
+    private static HashMap<String, String> remapPinYinMap = new HashMap<>();
 
     static {
         remapPinYinMap.put(PinYinUtils.toPinYin("编码"), "编码");

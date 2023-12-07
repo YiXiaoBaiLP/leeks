@@ -3,9 +3,9 @@ package handler;
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.ui.JBColor;
 import com.intellij.ui.table.JBTable;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.NumberUtils;
 import bean.CoinBean;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import utils.PinYinUtils;
 import utils.WindowUtils;
 
@@ -187,7 +187,7 @@ public abstract class CoinRefreshHandler extends DefaultTableModel {
         int rowCount = getRowCount();
         for (int rowIndex = 0; rowIndex < rowCount; rowIndex++) {
             Object valueAt = getValueAt(rowIndex, columnIndex);
-            if (StringUtils.equalsIgnoreCase(value, valueAt.toString())) {
+            if (com.intellij.openapi.util.text.StringUtil.equalsIgnoreCase(value, valueAt.toString())) {
                 return rowIndex;
             }
         }
@@ -199,9 +199,9 @@ public abstract class CoinRefreshHandler extends DefaultTableModel {
             return null;
         }
         // 与columnNames中的元素保持一致
-        Vector<Object> v = new Vector<Object>(columnNames.length);
-        for (int i = 0; i < columnNames.length; i++) {
-            v.addElement(coinBean.getValueByColumn(columnNames[i], colorful));
+        Vector<Object> v = new Vector<>(columnNames.length);
+        for (String columnName : columnNames) {
+            v.addElement(coinBean.getValueByColumn(columnName, colorful));
         }
         return v;
     }

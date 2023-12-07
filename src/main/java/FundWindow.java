@@ -17,7 +17,7 @@ import com.intellij.ui.content.ContentManager;
 import com.intellij.ui.table.JBTable;
 import handler.TianTianFundHandler;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import quartz.HandlerJob;
@@ -48,7 +48,7 @@ public class FundWindow implements ToolWindowFactory {
         //先加载代理
         loadProxySetting();
 
-        ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
+        ContentFactory contentFactory = ContentFactory.getInstance();
         Content content = contentFactory.createContent(mPanel, NAME, false);
         //股票
         Content content_stock = contentFactory.createContent(stockWindow.getmPanel(), StockWindow.NAME, false);

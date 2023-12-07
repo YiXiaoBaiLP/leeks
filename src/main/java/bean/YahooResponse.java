@@ -12,7 +12,7 @@ public class YahooResponse {
         return quoteResponse;
     }
 
-    public static class Result{
+    public static class Result {
         public Result() {
         }
 

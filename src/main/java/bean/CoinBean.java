@@ -83,28 +83,34 @@ public class CoinBean {
      */
     public String getValueByColumn(String colums, boolean colorful) {
         switch (colums) {
-            case "编码":
+            case "编码" -> {
                 return this.getSymbol();
-            case "涨跌":
+            }
+            case "涨跌" -> {
                 return String.valueOf(this.getRegularMarketChange());
-            case "涨跌幅":
-                return decimalFormat.format(this.getRegularMarketChangePercent())+"%";
-            case "最高价":
+            }
+            case "涨跌幅" -> {
+                return decimalFormat.format(this.getRegularMarketChangePercent()) + "%";
+            }
+            case "最高价" -> {
                 return String.valueOf(this.getRegularMarketDayHigh());
-            case "最低价":
+            }
+            case "最低价" -> {
                 return String.valueOf(this.getRegularMarketDayLow());
-            case "当前价":
+            }
+            case "当前价" -> {
                 return String.valueOf(this.getRegularMarketPrice());
-            case "更新时间":
+            }
+            case "更新时间" -> {
                 String timeStr = "--";
-                if (this.getTimeStamp()>0){
+                if (this.getTimeStamp() > 0) {
                     timeStr = String.valueOf(this.getTimeStamp());
                 }
                 return timeStr;
-
-            default:
+            }
+            default -> {
                 return "";
-
+            }
         }
     }
 }

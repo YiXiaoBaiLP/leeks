@@ -168,20 +168,24 @@ public class FundBean {
      */
     public String getValueByColumn(String colums, boolean colorful) {
         switch (colums) {
-            case "编码":
+            case "编码" -> {
                 return this.getFundCode();
-            case "基金名称":
+            }
+            case "基金名称" -> {
                 return colorful ? this.getFundName() : PinYinUtils.toPinYin(this.getFundName());
-            case "估算净值":
+            }
+            case "估算净值" -> {
                 return this.getGsz();
-            case "估算涨跌":
+            }
+            case "估算涨跌" -> {
                 String gszzlStr = "--";
                 String gszzl = this.getGszzl();
                 if (gszzl != null) {
                     gszzlStr = gszzl.startsWith("-") ? gszzl : "+" + gszzl;
                 }
                 return gszzlStr + "%";
-            case "更新时间":
+            }
+            case "更新时间" -> {
                 String timeStr = this.getGztime();
                 if (timeStr == null) {
                     timeStr = "--";
@@ -191,19 +195,25 @@ public class FundBean {
                     timeStr = timeStr.substring(timeStr.indexOf(" "));
                 }
                 return timeStr;
-            case "当日净值":
+            }
+            case "当日净值" -> {
                 return this.getDwjz() + "[" + this.getJzrq() + "]";
-            case "持仓成本价":
+            }
+            case "持仓成本价" -> {
                 return this.getCostPrise();
-            case "持有份额":
+            }
+            case "持有份额" -> {
                 return this.getBonds();
-            case "收益率":
+            }
+            case "收益率" -> {
                 return this.getCostPrise() != null ? this.getIncomePercent() + "%" : this.getIncomePercent();
-            case "收益":
+            }
+            case "收益" -> {
                 return this.getIncome();
-            default:
+            }
+            default -> {
                 return "";
-
+            }
         }
     }
 }
