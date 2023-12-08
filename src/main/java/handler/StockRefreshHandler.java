@@ -122,13 +122,15 @@ public abstract class StockRefreshHandler extends DefaultTableModel {
                 double temp = NumberUtils.toDouble(StringUtils.remove(Objects.toString(value), "%"));
                 if (temp > 0) {
                     if (colorful) {
-                        setForeground(JBColor.RED);
+//                        setForeground(JBColor.RED);
+                        setForeground(JBColor.GREEN);
                     } else {
                         setForeground(JBColor.DARK_GRAY);
                     }
                 } else if (temp < 0) {
                     if (colorful) {
-                        setForeground(JBColor.GREEN);
+//                        setForeground(JBColor.GREEN);
+                        setForeground(JBColor.RED);
                     } else {
                         setForeground(JBColor.GRAY);
                     }

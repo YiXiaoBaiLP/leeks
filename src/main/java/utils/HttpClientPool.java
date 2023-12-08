@@ -77,7 +77,7 @@ public class HttpClientPool {
             response = httpClient.execute(request);
             return EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
         } catch (Exception e) {
-            throw new Exception("got an error from HTTP for url : " + URLDecoder.decode(url, "UTF-8"), e);
+            throw new Exception("got an error from HTTP for url : " + URLDecoder.decode(url, StandardCharsets.UTF_8), e);
         } finally {
             if (response != null) {
                 EntityUtils.consumeQuietly(response.getEntity());

@@ -9,11 +9,9 @@ import utils.HttpClientPool;
 import utils.LogUtil;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SettingsWindow  implements Configurable {
     private JPanel panel1;
@@ -97,35 +95,44 @@ public class SettingsWindow  implements Configurable {
     }
 
 
-    private void testProxy(String proxy){
-        if (proxy.indexOf('：')>0){
-            LogUtil.notify("别用中文分割符啊!",false);
+    private void testProxy(String proxy) {
+        if (StringUtils.isBlank(proxy)) {
+            LogUtil.notify("请填写代理配置！", false);
+            return;
+        }
+        if (proxy.indexOf('：') > 0)
+            proxy = proxy.replace('：', ':');
+        if (!proxy.contains(":")) {
+            LogUtil.notify("请填写正确的代理信息！", false);
             return;
         }
         HttpClientPool httpClientPool = HttpClientPool.getHttpClient();
         httpClientPool.buildHttpClient(proxy);
         try {
             httpClientPool.get("https://www.baidu.com");
-            LogUtil.notify("代理测试成功!请保存",true);
+            LogUtil.notify("代理测试成功!请保存", true);
         } catch (Exception e) {
             e.printStackTrace();
-            LogUtil.notify("测试代理异常!",false);
+            LogUtil.notify("测试代理异常!", false);
         }
     }
 
     public static List<String> getConfigList(String key, String split) {
         String value = PropertiesComponent.getInstance().getValue(key);
-        if (StringUtils.isEmpty(value)) {
-            return new ArrayList<>();
-        }
-        Set<String> set = new LinkedHashSet<>();
-        String[] codes = value.split(split);
-        for (String code : codes) {
-            if (!code.isEmpty()) {
-                set.add(code.trim());
-            }
-        }
-        return new ArrayList<>(set);
+        if (StringUtils.isBlank(value)) return Collections.emptyList();
+//        Set<String> set = new LinkedHashSet<>();
+//        String[] codes = value.split(split);
+        return Stream.of(value.split(split))
+                .filter(StringUtils::isBlank)
+                .map(String::trim)
+                .distinct()
+                .collect(Collectors.toList());
+//        for (String code : codes) {
+//            if (!code.isEmpty()) {
+//                set.add(code.trim());
+//            }
+//        }
+//        return new ArrayList<>(set);
     }
 
     public static List<String> getConfigList(String key) {
@@ -161,7 +168,8 @@ public class SettingsWindow  implements Configurable {
             } else {
                 return "";
             }
-        }).collect(Collectors.joining())); errorMsg.append(getConfigList(cronExpressionStock.getText(), ";").stream().map(s -> {
+        }).collect(Collectors.joining()));
+        errorMsg.append(getConfigList(cronExpressionStock.getText(), ";").stream().map(s -> {
             if (!QuartzManager.checkCronExpression(s)) {
                 return "Stock请配置正确的cron表达式[" + s + "]、";
             } else {
